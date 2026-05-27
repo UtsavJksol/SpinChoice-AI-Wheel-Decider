@@ -1,0 +1,4021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SpinChoice - Modern iOS SwiftUI decision-making application. Spin the wheel, decide with OpenAI GPT-4o-mini intelligence. Full developer and product documentation.">
+    <meta name="keywords" content="iOS, SwiftUI, SpinChoice, DecideAI, Spin Wheel, Decision Maker, GPT-4o-mini, OpenAI Proxy, RevenueCat, Firebase App Check, Apple Sign In">
+    <meta name="author" content="Kalpesh Pirojiya">
+    <title>SpinChoice - iOS App Documentation & Product Landing Page</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SpinChoice - AI Decision Maker iOS App">
+    <meta property="og:description" content="Spin the wheel. Decide with AI. Gamified SwiftUI physics meets GPT-4o-mini analytical reasoning.">
+    <meta property="og:image" content="PremiumScreen.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="SpinChoice - AI Decision Maker iOS App">
+    <meta property="twitter:description" content="Spin the wheel. Decide with AI. Gamified SwiftUI physics meets GPT-4o-mini analytical reasoning.">
+    <meta property="twitter:image" content="PremiumScreen.png">
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==========================================================================
+           SpinChoice iOS App Documentation CSS
+           Design System: Apple + Linear + Notion Inspired
+           ========================================================================== */
+
+        /* Google Fonts Import */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+        /* --- CSS Variables & Design System --- */
+        :root {
+            /* Color Palette - Dark Mode (Default) */
+            --bg-base: #0a0b0e;
+            --bg-surface: rgba(17, 19, 24, 0.7);
+            --bg-surface-solid: #111318;
+            --bg-surface-hover: rgba(26, 29, 38, 0.8);
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-hover: rgba(255, 255, 255, 0.16);
+            
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --accent-blue: #3b82f6;
+            --accent-indigo: #6366f1;
+            --accent-purple: #a855f7;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --accent-danger: #ef4444;
+            
+            --glow-blue: rgba(59, 130, 246, 0.15);
+            --glow-indigo: rgba(99, 102, 241, 0.15);
+            --glow-purple: rgba(168, 85, 247, 0.15);
+            
+            --glass-blur: 16px;
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            
+            /* Layout & Spacing */
+            --header-height: 72px;
+            --sidebar-width: 280px;
+            --border-radius-sm: 8px;
+            --border-radius-md: 16px;
+            --border-radius-lg: 24px;
+            --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            /* Fonts */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-heading: 'Outfit', var(--font-sans);
+            --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        /* Light Mode Override */
+        body.light-mode {
+            --bg-base: #f6f8fa;
+            --bg-surface: rgba(255, 255, 255, 0.75);
+            --bg-surface-solid: #ffffff;
+            --bg-surface-hover: rgba(241, 245, 249, 0.9);
+            
+            --border-color: rgba(0, 0, 0, 0.08);
+            --border-color-hover: rgba(0, 0, 0, 0.16);
+            
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            
+            --accent-blue: #2563eb;
+            --accent-indigo: #4f46e5;
+            --accent-purple: #9333ea;
+            --accent-success: #059669;
+            --accent-warning: #d97706;
+            --accent-danger: #dc2626;
+            
+            --glow-blue: rgba(37, 99, 235, 0.08);
+            --glow-indigo: rgba(79, 70, 229, 0.08);
+            --glow-purple: rgba(147, 51, 234, 0.08);
+            
+            --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.08);
+        }
+
+        /* --- Base & Reset --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--header-height) + 20px);
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: var(--border-radius-sm);
+            border: 2px solid var(--bg-base);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            line-height: 1.25;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover {
+            color: var(--accent-indigo);
+        }
+
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            padding: 0.2rem 0.4rem;
+            background: rgba(0,0,0,0.25);
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            color: #e2e8f0;
+        }
+
+        body.light-mode code {
+            background: rgba(0,0,0,0.05);
+            color: var(--accent-indigo);
+        }
+
+        pre {
+            background: #0d0e12;
+            padding: 1.5rem;
+            border-radius: var(--border-radius-md);
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        body.light-mode pre {
+            background: #f1f5f9;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            border: none;
+            color: #f1f5f9;
+        }
+
+        body.light-mode pre code {
+            color: #1e293b;
+        }
+
+        /* --- Layout Grid --- */
+        .app-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            display: flex;
+            max-width: 1440px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            padding-top: var(--header-height);
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 2rem 4rem 4rem;
+            min-width: 0;
+        }
+
+        /* --- Background Ambient Blobs --- */
+        .ambient-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .ambient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.35;
+            mix-blend-mode: screen;
+            animation: floatBlob 25s infinite alternate ease-in-out;
+            transition: opacity 0.5s ease;
+        }
+
+        body.light-mode .ambient-blob {
+            opacity: 0.12;
+            mix-blend-mode: multiply;
+        }
+
+        .blob-1 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, var(--accent-indigo) 0%, transparent 80%);
+            top: -100px;
+            left: -100px;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-purple) 0%, transparent 80%);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -5s;
+            animation-duration: 30s;
+        }
+
+        .blob-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 80%);
+            top: 50%;
+            left: 60%;
+            animation-delay: -10s;
+            animation-duration: 20s;
+        }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(80px, 40px) scale(1.1) rotate(180deg); }
+            100% { transform: translate(-40px, 80px) scale(0.9) rotate(360deg); }
+        }
+
+        /* --- Header / Sticky Navigation --- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: var(--bg-surface);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4rem;
+            transition: background-color var(--transition-normal), border-color var(--transition-normal);
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 800;
+            font-size: 1.5rem;
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+            animation: pulseGlow 4s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(99, 102, 241, 0.3); }
+            100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.6); }
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Search Bar Wrapper */
+        .search-wrapper {
+            position: relative;
+            width: 280px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem 0.5rem 2.25rem;
+            border-radius: 9999px;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+        }
+
+        body.light-mode .search-input {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-indigo);
+            background: rgba(0,0,0,0.4);
+            box-shadow: 0 0 10px var(--glow-indigo);
+        }
+
+        body.light-mode .search-input:focus {
+            background: #fff;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            font-size: 0.9rem;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        body.light-mode .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .theme-toggle .sun-icon { display: none; }
+        .theme-toggle .moon-icon { display: block; }
+        body.light-mode .theme-toggle .sun-icon { display: block; }
+        body.light-mode .theme-toggle .moon-icon { display: none; }
+
+        /* --- Sidebar Navigation (Desktop) --- */
+        .sidebar-nav {
+            width: var(--sidebar-width);
+            position: sticky;
+            top: var(--header-height);
+            height: calc(100vh - var(--header-height));
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: rgba(10, 11, 14, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: border-color var(--transition-normal);
+        }
+
+        .sidebar-group-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .sidebar-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .sidebar-link-item a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            border-radius: var(--border-radius-sm);
+            transition: all var(--transition-fast);
+            border-left: 2px solid transparent;
+        }
+
+        .sidebar-link-item a:hover {
+            color: var(--text-primary);
+            background: var(--bg-surface-hover);
+            border-left-color: var(--accent-indigo);
+        }
+
+        .sidebar-link-item.active a {
+            color: var(--accent-indigo);
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.08);
+            border-left-color: var(--accent-indigo);
+        }
+
+        /* Mobile Nav Toggle */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        /* --- Section Elements --- */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-color);
+            scroll-margin-top: calc(var(--header-height) + 10px);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(168,85,247,0.1) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-indigo);
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* --- Glass Cards --- */
+        .glass-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--glass-shadow);
+            transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+        }
+
+        .glass-card:hover {
+            border-color: var(--border-color-hover);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        body.light-mode .glass-card:hover {
+            box-shadow: 0 12px 40px 0 rgba(15, 23, 42, 0.12);
+        }
+
+        /* --- Grid Utilities --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* ==========================================================================
+           Section Specific Styles
+           ========================================================================== */
+
+        /* --- 1. HERO SECTION --- */
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 30%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            animation: titleGradient 8s infinite alternate;
+        }
+
+        body.light-mode .hero-text h1 {
+            background: linear-gradient(135deg, #0f172a 30%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-intro {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        /* Store Buttons */
+        .store-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-store {
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-store:hover {
+            border-color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+        }
+
+        body.light-mode .btn-store {
+            background: #0f172a;
+            border-color: transparent;
+        }
+
+        body.light-mode .btn-store:hover {
+            background: #1e293b;
+            box-shadow: 0 5px 15px rgba(15,23,42,0.25);
+        }
+
+        .store-icon {
+            font-size: 1.5rem;
+        }
+
+        .store-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+
+        .store-text span {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .store-text strong {
+            font-size: 0.95rem;
+        }
+
+        /* Interactive Wheel Preview Box */
+        .hero-preview {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preview-glow-ring {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-indigo) 0%, transparent 70%);
+            filter: blur(40px);
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        /* --- Interactive Decision Wheel Demo --- */
+        .wheel-demo-container {
+            position: relative;
+            z-index: 2;
+            background: var(--bg-surface-solid);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--glass-shadow);
+            width: 360px;
+            text-align: center;
+        }
+
+        .wheel-canvas-wrapper {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 24px solid var(--accent-purple);
+            z-index: 10;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .wheel-svg-elem {
+            width: 100%;
+            height: 100%;
+            transform: rotate(0deg);
+            transition: transform 4s cubic-bezier(0.17, 0.89, 0.32, 1);
+        }
+
+        .wheel-center-cap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 28px;
+            height: 28px;
+            background: #fff;
+            border: 4px solid var(--bg-surface-solid);
+            border-radius: 50%;
+            z-index: 5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .wheel-control-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .wheel-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .wheel-input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--border-radius-sm);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+        }
+
+        body.light-mode .wheel-input {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .wheel-input:focus {
+            outline: none;
+            border-color: var(--accent-indigo);
+        }
+
+        .btn-spin {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-indigo) 100%);
+            border: none;
+            color: white;
+            padding: 0.65rem 1.25rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-spin:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-spin:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .wheel-result-box {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: var(--border-radius-sm);
+            background: rgba(255,255,255,0.02);
+            border: 1px dashed var(--border-color);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .wheel-result-title {
+            font-weight: 700;
+            color: var(--accent-success);
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .wheel-result-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* --- 2. ABOUT PROJECT --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .about-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .metric-card {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-number {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-indigo);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* --- 3. FEATURES SECTION --- */
+        .feature-card {
+            padding: 2.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--border-radius-sm);
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-indigo);
+            font-size: 1.5rem;
+        }
+
+        .feature-card:hover .feature-icon-box {
+            background: var(--accent-indigo);
+            color: white;
+            box-shadow: 0 0 15px var(--glow-indigo);
+        }
+
+        .feature-card h3 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 0.92rem;
+        }
+
+        .feature-tag-list {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+        .feature-mini-tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        /* --- 4. APP SCREENSHOTS GALLERY --- */
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn-toggle-gallery {
+            background: var(--bg-surface-solid);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-toggle-gallery.active {
+            background: var(--accent-indigo);
+            color: white;
+            border-color: var(--accent-indigo);
+            box-shadow: 0 4px 10px var(--glow-indigo);
+        }
+
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 0;
+        }
+
+        .gallery-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform var(--transition-normal);
+            scroll-snap-type: x mandatory;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding-bottom: 1rem;
+        }
+
+        .gallery-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-item {
+            flex: 0 0 240px;
+            scroll-snap-align: start;
+            cursor: zoom-in;
+            transition: transform var(--transition-normal);
+            position: relative;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            border: 4px solid #1e293b;
+            box-shadow: var(--glass-shadow);
+            aspect-ratio: 9 / 19.5;
+            background: #000;
+        }
+
+        .gallery-item.ipad-size {
+            flex: 0 0 450px;
+            aspect-ratio: 4 / 3;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-indigo);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: var(--text-muted);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .gallery-placeholder i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-indigo);
+        }
+
+        .gallery-placeholder span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-placeholder strong {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+            border: 4px solid #334155;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- 5. COMPLETE APP FLOW --- */
+        .flow-diagram-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .flow-step-container {
+            background: var(--bg-surface-solid);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: var(--border-radius-md);
+        }
+
+        .flow-title {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .svg-flow-chart {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            background: rgba(0,0,0,0.15);
+            border-radius: var(--border-radius-sm);
+            border: 1px solid rgba(255,255,255,0.03);
+            padding: 1rem;
+        }
+
+        body.light-mode .svg-flow-chart {
+            background: rgba(0,0,0,0.02);
+        }
+
+        /* SVG Flow Arrows Animation */
+        .arrow-flow {
+            stroke-dasharray: 8, 8;
+            animation: flowDash 30s linear infinite;
+        }
+
+        @keyframes flowDash {
+            to { stroke-dashoffset: -1000; }
+        }
+
+        /* --- 6. TECHNICAL ARCHITECTURE --- */
+        .arch-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 3rem;
+        }
+
+        .arch-card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .arch-layer-card {
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .arch-layer-num {
+            background: var(--accent-indigo);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px var(--glow-indigo);
+        }
+
+        .arch-layer-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .arch-layer-info p {
+            margin: 0;
+            font-size: 0.88rem;
+        }
+
+        /* --- 7. TECH STACK --- */
+        .tech-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-icon {
+            font-size: 2.25rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tech-card.swiftui .tech-icon { background: linear-gradient(135deg, #f05138 0%, #f47e3a 100%); -webkit-background-clip: text; }
+        .tech-card.combine .tech-icon { background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); -webkit-background-clip: text; }
+        .tech-card.firebase .tech-icon { background: linear-gradient(135deg, #ffcb2c 0%, #f5820c 100%); -webkit-background-clip: text; }
+        .tech-card.supabase .tech-icon { background: linear-gradient(135deg, #3ecf8e 0%, #34b27b 100%); -webkit-background-clip: text; }
+        .tech-card.revenuecat .tech-icon { background: linear-gradient(135deg, #ff4b4b 0%, #ff7c7c 100%); -webkit-background-clip: text; }
+
+        .tech-card h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .tech-card p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .tech-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- 8. FOLDER STRUCTURE SECTION --- */
+        .folder-explorer-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .folder-tree-box {
+            padding: 1.5rem;
+            background: #0d0e12;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            max-height: 480px;
+            overflow-y: auto;
+        }
+
+        body.light-mode .folder-tree-box {
+            background: #f8fafc;
+        }
+
+        .tree-node {
+            margin-left: 1.5rem;
+            position: relative;
+            padding: 0.2rem 0;
+        }
+
+        .tree-node::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -12px;
+            width: 1px;
+            height: 18px;
+            border-left: 1px dashed var(--border-color);
+        }
+
+        .tree-node::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: -12px;
+            width: 8px;
+            height: 1px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .tree-node.root {
+            margin-left: 0;
+        }
+
+        .tree-node.root::before, .tree-node.root::after {
+            display: none;
+        }
+
+        .node-label {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-secondary);
+            transition: color var(--transition-fast);
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+        }
+
+        .node-label:hover {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.03);
+        }
+
+        body.light-mode .node-label:hover {
+            background: rgba(0,0,0,0.03);
+        }
+
+        .node-label.active {
+            color: var(--accent-indigo);
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        .tree-node i {
+            width: 16px;
+            text-align: center;
+        }
+
+        .node-children {
+            display: block;
+        }
+
+        .node-children.collapsed {
+            display: none;
+        }
+
+        /* File Info Box */
+        .folder-info-card {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 1rem;
+        }
+
+        .info-file-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .info-file-icon {
+            font-size: 2rem;
+            color: var(--accent-indigo);
+        }
+
+        .info-file-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-file-name {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .info-file-size {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .info-file-body {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .info-file-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .info-file-tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-indigo);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        /* --- 9. UI COMPONENTS LIBRARY --- */
+        .component-playground {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+        }
+
+        .component-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .btn-comp-tab {
+            background: var(--bg-surface-solid);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-comp-tab:hover {
+            color: var(--text-primary);
+            border-color: var(--border-color-hover);
+        }
+
+        .btn-comp-tab.active {
+            background: rgba(99, 102, 241, 0.08);
+            color: var(--accent-indigo);
+            border-color: var(--accent-indigo);
+        }
+
+        .comp-viewer-pane {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .comp-preview-box {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 3rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, var(--glow-indigo) 0%, transparent 80%), var(--bg-surface-solid);
+            position: relative;
+            min-height: 200px;
+            overflow: hidden;
+        }
+
+        /* Mock UI Element Previews */
+        .mock-glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 16px;
+            width: 280px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .mock-glass-card p {
+            font-size: 0.85rem;
+            margin: 0.5rem 0 0;
+        }
+
+        .mock-gradient-button {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            letter-spacing: 0.02em;
+        }
+
+        .mock-confetti-btn {
+            background: var(--bg-base);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mock-premium-gate {
+            width: 320px;
+            height: 160px;
+            background: linear-gradient(135deg, #111318 0%, #1a1d26 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mock-gate-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            background: rgba(10, 11, 14, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+
+        .mock-gate-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .mock-gate-btn {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
+        }
+
+        .comp-info-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .comp-info-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .comp-info-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .comp-code-box {
+            margin: 0;
+        }
+
+        /* Copy Button on Pre Code Blocks */
+        .btn-copy-code {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 0.35rem 0.65rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-copy-code:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        /* --- 10. SETUP INSTRUCTIONS --- */
+        .terminal-window {
+            background: #090a0f;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+
+        .terminal-header {
+            background: #111318;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .term-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .term-close { background: #ef4444; }
+        .term-min { background: #f59e0b; }
+        .term-max { background: #10b981; }
+
+        .terminal-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+        }
+
+        .terminal-tabs {
+            display: flex;
+            background: #0d0f14;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .terminal-tab-btn {
+            background: none;
+            border: none;
+            border-right: 1px solid var(--border-color);
+            padding: 0.65rem 1.25rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .terminal-tab-btn.active {
+            background: #090a0f;
+            color: var(--accent-indigo);
+            font-weight: 600;
+        }
+
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            min-height: 240px;
+            position: relative;
+        }
+
+        .terminal-body pre {
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: none;
+        }
+
+        .terminal-line {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
+
+        .terminal-line.cmd::before {
+            content: '$ ';
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
+
+        .terminal-line.output {
+            color: var(--text-secondary);
+        }
+
+        .terminal-line.comment {
+            color: var(--text-muted);
+        }
+
+        /* --- 12. API DOCUMENTATION --- */
+        .api-endpoint-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .api-endpoint-badge.post {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        /* --- 16. FUTURE ROADMAP --- */
+        .roadmap-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .roadmap-track {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .roadmap-track::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--border-color);
+            z-index: 1;
+        }
+
+        .roadmap-node {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 5rem;
+        }
+
+        .roadmap-dot {
+            position: absolute;
+            top: 31px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--bg-base);
+            border: 4px solid var(--accent-indigo);
+            box-shadow: 0 0 10px var(--accent-indigo);
+            transition: all var(--transition-fast);
+        }
+
+        .roadmap-node:hover .roadmap-dot {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--accent-purple);
+            border-color: var(--accent-purple);
+        }
+
+        .roadmap-node.completed .roadmap-dot {
+            background: var(--accent-success);
+            border-color: var(--accent-success);
+            box-shadow: 0 0 10px var(--accent-success);
+        }
+
+        .roadmap-phase {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .roadmap-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .roadmap-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- 17. FAQ ACCORDION --- */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 800px;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            background: var(--bg-surface-solid);
+        }
+
+        .faq-question-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.25rem 1.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.05rem;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-heading);
+        }
+
+        .faq-question-btn:hover {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .faq-chevron {
+            transition: transform var(--transition-fast);
+            color: var(--text-muted);
+        }
+
+        .faq-item.active .faq-chevron {
+            transform: rotate(180deg);
+            color: var(--accent-indigo);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-normal) ease-out;
+            background: rgba(0,0,0,0.1);
+        }
+
+        body.light-mode .faq-answer {
+            background: rgba(0,0,0,0.01);
+        }
+
+        .faq-answer-inner {
+            padding: 1.25rem 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* --- 18. CONTACT / SUPPORT SECTION --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+        }
+
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .contact-card {
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+        }
+
+        .contact-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--border-radius-sm);
+            background: rgba(99, 102, 241, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-indigo);
+            font-size: 1.25rem;
+        }
+
+        .contact-card-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-card-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .contact-card-value {
+            font-weight: 600;
+            font-size: 0.98rem;
+            color: var(--text-primary);
+        }
+
+        .contact-form {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .form-control {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius-sm);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            transition: all var(--transition-fast);
+        }
+
+        body.light-mode .form-control {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-indigo);
+            box-shadow: 0 0 10px var(--glow-indigo);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-purple) 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            align-self: flex-start;
+        }
+
+        .btn-submit:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+        }
+
+        /* --- 19. FOOTER --- */
+        .site-footer {
+            border-top: 1px solid var(--border-color);
+            background: rgba(10,11,14,0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 4rem 4rem 2rem;
+            margin-top: auto;
+            transition: border-color var(--transition-normal), background-color var(--transition-normal);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 3rem;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+        }
+
+        .footer-brand-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 320px;
+        }
+
+        .footer-brand-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-col-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-indigo);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1440px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-meta-info {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-meta-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        /* ==========================================================================
+           Responsive Breakpoints & Media Queries
+           ========================================================================== */
+
+        /* Large Tablets & Desktop adjust */
+        @media (max-width: 1200px) {
+            .site-header {
+                padding: 0 2rem;
+            }
+            
+            .content-area {
+                padding: 2rem 2.5rem 4rem;
+            }
+            
+            .hero-content {
+                gap: 2rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 3.25rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            
+            .sidebar-nav {
+                display: none;
+            }
+            
+            .mobile-nav-toggle {
+                display: block;
+            }
+        }
+
+        /* Tablets (Portrait) */
+        @media (max-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                min-height: auto;
+                padding-top: 2rem;
+            }
+            
+            .hero-intro {
+                margin: 0 auto 2.5rem;
+            }
+            
+            .store-buttons {
+                justify-content: center;
+            }
+            
+            .about-grid, .arch-grid, .folder-explorer-layout, .component-playground, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .roadmap-track {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .roadmap-track::before {
+                display: none;
+            }
+            
+            .roadmap-node {
+                padding-top: 0;
+                padding-left: 3rem;
+                margin-bottom: 2rem;
+            }
+            
+            .roadmap-dot {
+                top: 4px;
+                left: 0;
+            }
+        }
+
+        /* Mobile Phones */
+        @media (max-width: 600px) {
+            .site-header {
+                padding: 0 1rem;
+            }
+            
+            .content-area {
+                padding: 1.5rem 1rem 3rem;
+            }
+            
+            .search-wrapper {
+                display: none;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .grid-2, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .wheel-demo-container {
+                width: 100%;
+                max-width: 320px;
+                padding: 1.5rem;
+            }
+            
+            .wheel-canvas-wrapper {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .site-footer {
+                padding: 3rem 1.5rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient background animations -->
+    <div class="ambient-background">
+        <div class="ambient-blob blob-1"></div>
+        <div class="ambient-blob blob-2"></div>
+        <div class="ambient-blob blob-3"></div>
+    </div>
+
+    <div class="app-wrapper">
+        
+        <!-- --- HEADER / STICKY NAV --- -->
+        <header class="site-header">
+            <div class="header-brand">
+                <div class="brand-icon">S</div>
+                <span>SpinChoice</span>
+            </div>
+            
+            <div class="header-actions">
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="doc-search-input" class="search-input" placeholder="Search documentation...">
+                </div>
+                
+                <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme">
+                    <i class="fas fa-moon moon-icon"></i>
+                    <i class="fas fa-sun sun-icon"></i>
+                </button>
+                
+                <button class="mobile-nav-toggle" id="mobile-menu-btn" aria-label="Toggle Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="main-container">
+            
+            <!-- --- SIDEBAR NAVIGATION --- -->
+            <nav class="sidebar-nav" id="sidebar-menu">
+                <div>
+                    <div class="sidebar-group-title">Product</div>
+                    <ul class="sidebar-links">
+                        <li class="sidebar-link-item active"><a href="#hero"><i class="fas fa-rocket"></i> Home</a></li>
+                        <li class="sidebar-link-item"><a href="#about"><i class="fas fa-info-circle"></i> About Project</a></li>
+                        <li class="sidebar-link-item"><a href="#features"><i class="fas fa-star"></i> Key Features</a></li>
+                        <li class="sidebar-link-item"><a href="#gallery"><i class="fas fa-images"></i> App Screenshots</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <div class="sidebar-group-title">Architecture & Code</div>
+                    <ul class="sidebar-links">
+                        <li class="sidebar-link-item"><a href="#flows"><i class="fas fa-route"></i> Complete Flows</a></li>
+                        <li class="sidebar-link-item"><a href="#architecture"><i class="fas fa-layer-group"></i> Architecture</a></li>
+                        <li class="sidebar-link-item"><a href="#tech-stack"><i class="fas fa-microchip"></i> Tech Stack</a></li>
+                        <li class="sidebar-link-item"><a href="#folder-structure"><i class="fas fa-folder-open"></i> Folder Tree</a></li>
+                        <li class="sidebar-link-item"><a href="#ui-components"><i class="fas fa-cubes"></i> UI Components</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <div class="sidebar-group-title">Setup & API</div>
+                    <ul class="sidebar-links">
+                        <li class="sidebar-link-item"><a href="#setup"><i class="fas fa-terminal"></i> Setup Steps</a></li>
+                        <li class="sidebar-link-item"><a href="#env-variables"><i class="fas fa-key"></i> Environment Vars</a></li>
+                        <li class="sidebar-link-item"><a href="#api-docs"><i class="fas fa-network-wired"></i> API Specifications</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <div class="sidebar-group-title">Performance & Operations</div>
+                    <ul class="sidebar-links">
+                        <li class="sidebar-link-item"><a href="#performance"><i class="fas fa-tachometer-alt"></i> Performance</a></li>
+                        <li class="sidebar-link-item"><a href="#security"><i class="fas fa-shield-alt"></i> App Security</a></li>
+                        <li class="sidebar-link-item"><a href="#analytics"><i class="fas fa-chart-line"></i> Analytics & Logs</a></li>
+                        <li class="sidebar-link-item"><a href="#roadmap"><i class="fas fa-map-signs"></i> Future Roadmap</a></li>
+                        <li class="sidebar-link-item"><a href="#faq"><i class="fas fa-question-circle"></i> FAQs</a></li>
+                        <li class="sidebar-link-item"><a href="#contact"><i class="fas fa-envelope"></i> Contact Support</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- --- CONTENT AREA --- -->
+            <main class="content-area">
+
+                <!-- 1. HERO SECTION -->
+                <section id="hero">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <span class="section-tag">iOS SwiftUI Dilemma Resolver</span>
+                            <h1>SpinChoice</h1>
+                            <p class="hero-subtitle">The wheel spins. The decision is made. Now you can move on.</p>
+                            <p class="hero-intro">
+                                Decision fatigue drains our mental energy. We overthink, we delay, we second-guess ourselves out of things we actually want. <strong>SpinChoice</strong> changes that by combining gamified 3D physics with OpenAI GPT-4o-mini intelligence.
+                            </p>
+                            
+                            <div class="store-buttons">
+                                <a href="https://apple.co/3..." class="btn-store">
+                                    <i class="fab fa-apple store-icon"></i>
+                                    <div class="store-text">
+                                        <span>Download on the</span>
+                                        <strong>App Store</strong>
+                                    </div>
+                                </a>
+                                <a href="#setup" class="btn-store" style="background: transparent; border-color: var(--border-color);">
+                                    <i class="fas fa-code store-icon" style="color: var(--accent-indigo);"></i>
+                                    <div class="store-text">
+                                        <span>Developer Guide</span>
+                                        <strong>Xcode Project</strong>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Wheel Live Preview Mockup -->
+                        <div class="hero-preview">
+                            <div class="preview-glow-ring"></div>
+                            
+                            <div class="wheel-demo-container">
+                                <h3 style="font-size: 1rem; margin: 0 0 1rem; font-family: var(--font-heading);">Web Decision Wheel Simulator</h3>
+                                <div class="wheel-canvas-wrapper">
+                                    <div class="wheel-pointer"></div>
+                                    <svg class="wheel-svg-elem" id="wheel-svg" viewBox="0 0 220 220">
+                                        <!-- Rendered dynamically -->
+                                    </svg>
+                                    <div class="wheel-center-cap"></div>
+                                </div>
+                                <div class="wheel-control-form">
+                                    <div class="wheel-input-group">
+                                        <input type="text" id="wheel-new-option-input" class="wheel-input" placeholder="Type custom option..." maxlength="20">
+                                        <button id="wheel-add-option-btn" class="btn-spin" style="padding: 0.5rem 0.75rem;"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                    <button id="wheel-spin-btn" class="btn-spin">SPIN THE WHEEL</button>
+                                </div>
+                                <div class="wheel-result-box" id="wheel-result">
+                                    <span class="wheel-result-desc">Your results will appear here</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. ABOUT PROJECT -->
+                <section id="about">
+                    <span class="section-tag">Product Overview</span>
+                    <h2>About SpinChoice</h2>
+                    <p class="section-desc">Why do we get stuck? SpinChoice resolves analytical gridlock by wrapping AI recommendation engines inside a psychologically rewarding, physical spin mechanic.</p>
+                    
+                    <div class="about-grid">
+                        <div class="glass-card" style="padding: 2rem;">
+                            <h3 style="margin-top: 0;"><i class="fas fa-check-circle" style="color: var(--accent-success); margin-right: 0.5rem;"></i> The Core Dilemma Solver</h3>
+                            <p>Most people do not lack information — they lack commitment. SpinChoice provides the commitment. It bridges the gap between complex analytical frameworks and random, zero-intelligence coin flippers.</p>
+                            <p>Type any question, speak it aloud, or pick a preset. SpinChoice generates four contextually relevant options, adds a confidence metric, lets you spin to decide, and gives an AI-driven explanation coaching you on why that decision is the perfect path forward.</p>
+                            <h4 style="margin: 1.5rem 0 0.5rem; color: var(--text-primary);">Target Users:</h4>
+                            <p style="font-size: 0.92rem; margin: 0;">Professionals seeking task prioritization, friend groups choosing restaurants/movies, travelers planning itineraries, and everyday users looking to lift the daily weight of choices.</p>
+                        </div>
+                        
+                        <div class="about-metrics">
+                            <div class="glass-card metric-card">
+                                <div class="metric-number">4</div>
+                                <div class="metric-label">Options per dilemma</div>
+                            </div>
+                            <div class="glass-card metric-card">
+                                <div class="metric-number">GPT-4o</div>
+                                <div class="metric-label">mini intelligence</div>
+                            </div>
+                            <div class="glass-card metric-card">
+                                <div class="metric-number">60fps</div>
+                                <div class="metric-label">Wheel Render pass</div>
+                            </div>
+                            <div class="glass-card metric-card">
+                                <div class="metric-number">100%</div>
+                                <div class="metric-label">On-device voice privacy</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. FEATURES SECTION -->
+                <section id="features">
+                    <span class="section-tag">Key Functionality</span>
+                    <h2>Premium App Features</h2>
+                    <p class="section-desc">Every element of SpinChoice is crafted for visual excellence, performance, and user retention. Explore the capabilities of the application.</p>
+                    
+                    <div class="grid-3">
+                        <!-- Card 1 -->
+                        <div class="glass-card feature-card">
+                            <div class="feature-icon-box"><i class="fas fa-brain"></i></div>
+                            <h3>AI Option Generator</h3>
+                            <p>Ask anything. OpenAI's GPT-4o-mini generates 4 intelligent, tailored options in seconds based on your specific situation, avoiding generic suggestions.</p>
+                            <div class="feature-tag-list">
+                                <span class="feature-mini-tag">GPT-4o-mini</span>
+                                <span class="feature-mini-tag">Cloudflare Worker</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="glass-card feature-card">
+                            <div class="feature-icon-box"><i class="fas fa-circle-notch"></i></div>
+                            <h3>Decision Wheel</h3>
+                            <p>A premium custom SwiftUI Canvas spinning wheel turns choices into a committed answer. Elegant animations and tactile haptics make spinning extremely satisfying.</p>
+                            <div class="feature-tag-list">
+                                <span class="feature-mini-tag">Canvas API</span>
+                                <span class="feature-mini-tag">Taptic Engine</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="glass-card feature-card">
+                            <div class="feature-icon-box"><i class="fas fa-quote-right"></i></div>
+                            <h3>AI Reasoning</h3>
+                            <p>Every spin result is accompanied by a warm, personalized explanation outlining why the chosen path is ideal, reinforcing action confidence.</p>
+                            <div class="feature-tag-list">
+                                <span class="feature-mini-tag">Reasoning API</span>
+                                <span class="feature-mini-tag">Confidence Metrics</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="glass-card feature-card">
+                            <div class="feature-icon-box"><i class="fas fa-history"></i></div>
+                            <h3>Decision History</h3>
+                            <p>Every choice is logged automatically to a local database. Users can search, review, analyze, or delete past dilemmas to track trends.</p>
+                            <div class="feature-tag-list">
+                                <span class="feature-mini-tag">UserDefaults JSON</span>
+                                <span class="feature-mini-tag">Searchable Query</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div class="glass-card feature-card">
+                            <div class="feature-icon-box"><i class="fas fa-microphone"></i></div>
+                            <h3>Voice Input</h3>
+                            <p>Speak your dilemma instead of typing. Uses Apple's built-in on-device Speech framework, ensuring high-speed dictation without transmitting audio files.</p>
+                            <div class="feature-tag-list">
+                                <span class="feature-mini-tag">Speech Framework</span>
+                                <span class="feature-mini-tag">100% Private</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div class="glass-card feature-card">
+                            <div class="feature-icon-box"><i class="fas fa-chart-pie"></i></div>
+                            <h3>AI Insights (Premium)</h3>
+                            <p>Unlock deep charts showing weekly trends, most-used categories, and decision parameters. Helps identify patterns and reduce future decision fatigue.</p>
+                            <div class="feature-tag-list">
+                                <span class="feature-mini-tag">RevenueCat</span>
+                                <span class="feature-mini-tag">Charts API</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. APP SCREENSHOTS GALLERY -->
+                <section id="gallery">
+                    <span class="section-tag">Interactive Interface</span>
+                    <h2>App Screenshots Gallery</h2>
+                    <p class="section-desc">Toggle between mobile layouts to preview how the application adapts and renders across Apple platforms.</p>
+                    
+                    <div class="gallery-controls">
+                        <button class="btn-toggle-gallery active" data-device="iphone">iPhone Mockups</button>
+                        <button class="btn-toggle-gallery" data-device="ipad">iPad Mockups</button>
+                    </div>
+
+                    <div class="gallery-container">
+                        <div class="gallery-track" id="gallery-slider-track">
+                            <!-- Screenshot 1 -->
+                            <div class="gallery-item">
+                                <img src="../SS/iPhone/iPhone_1.png" alt="iPhone Screenshot 1" onerror="this.style.display='none';">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>Screenshot 1</span>
+                                    <strong>iPhone Home View</strong>
+                                </div>
+                            </div>
+                            
+                            <!-- Screenshot 2 -->
+                            <div class="gallery-item">
+                                <img src="../SS/iPhone/iPhone_2.png" alt="iPhone Screenshot 2" onerror="this.style.display='none';">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-brain"></i>
+                                    <span>Screenshot 2</span>
+                                    <strong>AI Option Generator</strong>
+                                </div>
+                            </div>
+
+                            <!-- Screenshot 3 -->
+                            <div class="gallery-item">
+                                <img src="../SS/iPhone/iPhone_3.png" alt="iPhone Screenshot 3" onerror="this.style.display='none';">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-compass"></i>
+                                    <span>Screenshot 3</span>
+                                    <strong>Spin Wheel Canvas</strong>
+                                </div>
+                            </div>
+
+                            <!-- Screenshot 4 -->
+                            <div class="gallery-item">
+                                <img src="../SS/iPhone/iPhone_4.png" alt="iPhone Screenshot 4" onerror="this.style.display='none';">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-award"></i>
+                                    <span>Screenshot 4</span>
+                                    <strong>AI Reasoning Coach</strong>
+                                </div>
+                            </div>
+
+                            <!-- Screenshot 5 -->
+                            <div class="gallery-item">
+                                <img src="../SS/iPhone/iPhone_5.png" alt="iPhone Screenshot 5" onerror="this.style.display='none';">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-gem"></i>
+                                    <span>Screenshot 5</span>
+                                    <strong>Premium Paywall</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. COMPLETE APP FLOW -->
+                <section id="flows">
+                    <span class="section-tag">Visual Pipelines</span>
+                    <h2>Complete App Flow Diagrams</h2>
+                    <p class="section-desc">Review the visual pathways representing the launch sequences, authentication logic, and data flows.</p>
+                    
+                    <div class="flow-diagram-wrapper">
+                        <!-- Flow 1 -->
+                        <div class="flow-step-container">
+                            <div class="flow-title"><i class="fas fa-power-off"></i> App Launch Flow</div>
+                            <p style="font-size: 0.9rem; margin-bottom: 1rem;">Resolves launch configurations dynamically inside <code>resolveLaunchDestination()</code> to direct users:</p>
+                            
+                            <svg class="svg-flow-chart" viewBox="0 0 800 120">
+                                <rect x="20" y="30" width="100" height="50" rx="8" fill="#1e293b" stroke="#3b82f6" />
+                                <text x="70" y="60" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">Launch App</text>
+
+                                <rect x="180" y="30" width="110" height="50" rx="8" fill="#1e293b" stroke="#a855f7" />
+                                <text x="235" y="60" fill="#fff" font-size="10" text-anchor="middle">Onboarding Done?</text>
+
+                                <rect x="350" y="30" width="110" height="50" rx="8" fill="#1e293b" stroke="#a855f7" />
+                                <text x="405" y="60" fill="#fff" font-size="10" text-anchor="middle">Authenticated?</text>
+
+                                <rect x="520" y="30" width="110" height="50" rx="8" fill="#1e293b" stroke="#a855f7" />
+                                <text x="575" y="60" fill="#fff" font-size="10" text-anchor="middle">Has Profile?</text>
+
+                                <rect x="680" y="30" width="100" height="50" rx="8" fill="#1e293b" stroke="#10b981" />
+                                <text x="730" y="60" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">Home Tab</text>
+
+                                <path d="M 120 55 L 180 55" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" class="arrow-flow" />
+                                <path d="M 290 55 L 350 55" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" class="arrow-flow" />
+                                <path d="M 460 55 L 520 55" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" class="arrow-flow" />
+                                <path d="M 630 55 L 680 55" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" class="arrow-flow" />
+                                
+                                <defs>
+                                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+
+                        <!-- Flow 2 -->
+                        <div class="flow-step-container">
+                            <div class="flow-title"><i class="fas fa-exchange-alt"></i> Option Generation & API Flow</div>
+                            <p style="font-size: 0.9rem; margin-bottom: 1rem;">The data cycle of custom dilemma generation via secure Cloudflare Worker proxies:</p>
+                            
+                            <svg class="svg-flow-chart" viewBox="0 0 800 120">
+                                <rect x="20" y="30" width="120" height="50" rx="8" fill="#1e293b" stroke="#3b82f6" />
+                                <text x="80" y="60" fill="#fff" font-size="10" text-anchor="middle">iOS App (Dilemma)</text>
+
+                                <rect x="200" y="30" width="130" height="50" rx="8" fill="#1e293b" stroke="#a855f7" />
+                                <text x="265" y="60" fill="#fff" font-size="10" text-anchor="middle">Cloudflare Worker Proxy</text>
+
+                                <rect x="390" y="30" width="110" height="50" rx="8" fill="#1e293b" stroke="#6366f1" />
+                                <text x="445" y="60" fill="#fff" font-size="10" text-anchor="middle">OpenAI GPT API</text>
+
+                                <rect x="560" y="30" width="100" height="50" rx="8" fill="#1e293b" stroke="#10b981" />
+                                <text x="610" y="60" fill="#fff" font-size="10" text-anchor="middle">JSON Parser</text>
+
+                                <rect x="690" y="30" width="90" height="50" rx="8" fill="#1e293b" stroke="#10b981" />
+                                <text x="735" y="60" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">Spin Wheel</text>
+
+                                <path d="M 140 55 L 200 55" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" class="arrow-flow" />
+                                <path d="M 330 55 L 390 55" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" class="arrow-flow" />
+                                <path d="M 500 55 L 560 55" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" class="arrow-flow" />
+                                <path d="M 660 55 L 690 55" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" class="arrow-flow" />
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. TECHNICAL ARCHITECTURE -->
+                <section id="architecture">
+                    <span class="section-tag">Development Framework</span>
+                    <h2>Technical Architecture</h2>
+                    <p class="section-desc">SpinChoice uses a five-tier layered MVVM model implementing strict separation of concerns.</p>
+                    
+                    <div class="arch-grid">
+                        <div class="arch-card-list">
+                            <!-- Layer 1 -->
+                            <div class="glass-card arch-layer-card">
+                                <div class="arch-layer-num">1</div>
+                                <div class="arch-layer-info">
+                                    <h4>Presentation Layer (SwiftUI Views)</h4>
+                                    <p>Declarative views acting as read-only observers of ViewModel states. Contains zero business logic, enabling quick UI iterations.</p>
+                                </div>
+                            </div>
+                            <!-- Layer 2 -->
+                            <div class="glass-card arch-layer-card">
+                                <div class="arch-layer-num">2</div>
+                                <div class="arch-layer-info">
+                                    <h4>ViewModel Layer (@MainActor ObservableObjects)</h4>
+                                    <p>Guarantees main-thread UI updates. Coordinates asynchronous network actions via Swift Concurrency (<code>async/await</code>).</p>
+                                </div>
+                            </div>
+                            <!-- Layer 3 -->
+                            <div class="glass-card arch-layer-card">
+                                <div class="arch-layer-num">3</div>
+                                <div class="arch-layer-info">
+                                    <h4>Service Layer (Singletons)</h4>
+                                    <p>Autonomous stateful and stateless managers (e.g. <code>AIService</code>, <code>PremiumManager</code>, <code>SpeechService</code>) wrapping hardware and cloud systems.</p>
+                                </div>
+                            </div>
+                            <!-- Layer 4 -->
+                            <div class="glass-card arch-layer-card">
+                                <div class="arch-layer-num">4</div>
+                                <div class="arch-layer-info">
+                                    <h4>Data Layer (Pure Value Types)</h4>
+                                    <p>Decoupled structures (e.g. <code>Decision</code>, <code>DecisionOption</code>, <code>AppSettings</code>) implementing Swift's <code>Codable</code> protocol.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Architecture Sidebar Details -->
+                        <div class="glass-card" style="padding: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+                            <h3 style="margin: 0; color: var(--accent-purple);">Navigation & State</h3>
+                            <p style="font-size: 0.92rem; margin: 0;">
+                                The global state uses <code>AppState</code> (injected via <code>.environmentObject</code>) as the core session state machine.
+                            </p>
+                            <p style="font-size: 0.92rem; margin: 0;">
+                                View navigation stacks are routed through <code>NavigationCoordinator</code> using per-tab destination stacks, resolving SPM dependency routing.
+                            </p>
+                            
+                            <h4 style="margin: 1rem 0 0.5rem; color: var(--text-primary);">SDK Initialization Sequence:</h4>
+                            <ol style="margin-left: 1.25rem; font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.4rem;">
+                                <li><strong>AppCheckService</strong>: Assures app attestation keys.</li>
+                                <li><strong>FirebaseApp</strong>: Configures core database pipelines.</li>
+                                <li><strong>PremiumManager</strong>: Configures RevenueCat bindings.</li>
+                                <li><strong>AnalyticsService</strong>: Registers AppMetrica events.</li>
+                                <li><strong>RemoteConfigService</strong>: Resolves remote flags.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. TECH STACK -->
+                <section id="tech-stack">
+                    <span class="section-tag">Technology Badge Grid</span>
+                    <h2>Tech Stack Overview</h2>
+                    <p class="section-desc">Technologies powering the SpinChoice ecosystem, ensuring offline caching, speed, and safety.</p>
+                    
+                    <div class="grid-4">
+                        <!-- Swift -->
+                        <div class="glass-card tech-card swiftui">
+                            <div class="tech-icon"><i class="fab fa-swift"></i></div>
+                            <h4>Swift SwiftUI</h4>
+                            <p>iOS Native UI & Combine</p>
+                            <span class="tech-badge">iOS 16+</span>
+                        </div>
+                        
+                        <!-- Combine -->
+                        <div class="glass-card tech-card combine">
+                            <div class="tech-icon"><i class="fas fa-network-wired"></i></div>
+                            <h4>Combine</h4>
+                            <p>Reactive State pipelines</p>
+                            <span class="tech-badge">Framework</span>
+                        </div>
+
+                        <!-- RevenueCat -->
+                        <div class="glass-card tech-card revenuecat">
+                            <div class="tech-icon"><i class="fas fa-gem"></i></div>
+                            <h4>RevenueCat</h4>
+                            <p>Entitlements & Paywalls</p>
+                            <span class="tech-badge">v5.72.0</span>
+                        </div>
+
+                        <!-- Firebase -->
+                        <div class="glass-card tech-card firebase">
+                            <div class="tech-icon"><i class="fas fa-fire"></i></div>
+                            <h4>Firebase</h4>
+                            <p>App Check & Config</p>
+                            <span class="tech-badge">v12.13.0</span>
+                        </div>
+
+                        <!-- Supabase -->
+                        <div class="glass-card tech-card supabase">
+                            <div class="tech-icon"><i class="fas fa-database"></i></div>
+                            <h4>Supabase</h4>
+                            <p>Alternative Backend</p>
+                            <span class="tech-badge">Candidate</span>
+                        </div>
+
+                        <!-- REST APIs -->
+                        <div class="glass-card tech-card">
+                            <div class="tech-icon"><i class="fas fa-cloud"></i></div>
+                            <h4>Cloudflare Workers</h4>
+                            <p>Secure OpenAI AI Proxy</p>
+                            <span class="tech-badge">Edge Worker</span>
+                        </div>
+
+                        <!-- AppMetrica -->
+                        <div class="glass-card tech-card">
+                            <div class="tech-icon"><i class="fas fa-chart-area"></i></div>
+                            <h4>AppMetrica</h4>
+                            <p>Anonymized Telemetry</p>
+                            <span class="tech-badge">v6.3.0</span>
+                        </div>
+
+                        <!-- Speech -->
+                        <div class="glass-card tech-card">
+                            <div class="tech-icon"><i class="fas fa-volume-up"></i></div>
+                            <h4>Speech Framework</h4>
+                            <p>Local Speech to Text</p>
+                            <span class="tech-badge">On-Device</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. FOLDER STRUCTURE SECTION -->
+                <section id="folder-structure">
+                    <span class="section-tag">Project Directory Tree</span>
+                    <h2>Xcode Folder Structure</h2>
+                    <p class="section-desc">Explore the repository directory tree. Click on directories or files to inspect their role, size, and metadata.</p>
+                    
+                    <div class="folder-explorer-layout">
+                        <!-- Tree panel -->
+                        <div class="folder-tree-box">
+                            <div class="tree-node root" data-type="folder" data-name="DecideAI">
+                                <span class="node-label"><i class="fas fa-folder-open node-folder-icon"></i> DecideAI/</span>
+                                <div class="node-children">
+                                    
+                                    <div class="tree-node" data-type="file" data-name="DecideAIApp.swift">
+                                        <span class="node-label"><i class="fas fa-file-code"></i> DecideAIApp.swift</span>
+                                    </div>
+                                    
+                                    <div class="tree-node" data-type="folder" data-name="App">
+                                        <span class="node-label"><i class="fas fa-folder node-folder-icon"></i> App/</span>
+                                        <div class="node-children collapsed">
+                                            <div class="tree-node" data-type="file" data-name="AppState.swift">
+                                                <span class="node-label"><i class="fas fa-file-code"></i> AppState.swift</span>
+                                            </div>
+                                            <div class="tree-node" data-type="file" data-name="NavigationCoordinator.swift">
+                                                <span class="node-label"><i class="fas fa-file-code"></i> NavigationCoordinator.swift</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tree-node" data-type="folder" data-name="Core">
+                                        <span class="node-label"><i class="fas fa-folder node-folder-icon"></i> Core/</span>
+                                        <div class="node-children collapsed">
+                                            <div class="tree-node" data-type="folder" data-name="Config">
+                                                <span class="node-label"><i class="fas fa-folder node-folder-icon"></i> Config/</span>
+                                                <div class="node-children collapsed">
+                                                    <div class="tree-node" data-type="file" data-name="Secrets.xcconfig">
+                                                        <span class="node-label"><i class="fas fa-file-signature"></i> Secrets.xcconfig</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tree-node" data-type="folder" data-name="Services">
+                                                <span class="node-label"><i class="fas fa-folder node-folder-icon"></i> Services/</span>
+                                                <div class="node-children collapsed">
+                                                    <div class="tree-node" data-type="file" data-name="AIService.swift">
+                                                        <span class="node-label"><i class="fas fa-file-code"></i> AIService.swift</span>
+                                                    </div>
+                                                    <div class="tree-node" data-type="file" data-name="PremiumManager.swift">
+                                                        <span class="node-label"><i class="fas fa-file-code"></i> PremiumManager.swift</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tree-node" data-type="folder" data-name="ViewModels">
+                                        <span class="node-label"><i class="fas fa-folder node-folder-icon"></i> ViewModels/</span>
+                                        <div class="node-children collapsed">
+                                            <div class="tree-node" data-type="file" data-name="SpinWheelViewModel.swift">
+                                                <span class="node-label"><i class="fas fa-file-code"></i> SpinWheelViewModel.swift</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tree-node" data-type="folder" data-name="Views">
+                                        <span class="node-label"><i class="fas fa-folder node-folder-icon"></i> Views/</span>
+                                        <div class="node-children collapsed">
+                                            <div class="tree-node" data-type="file" data-name="HomeView.swift">
+                                                <span class="node-label"><i class="fas fa-file-code"></i> HomeView.swift</span>
+                                            </div>
+                                            <div class="tree-node" data-type="file" data-name="SpinWheelView.swift">
+                                                <span class="node-label"><i class="fas fa-file-code"></i> SpinWheelView.swift</span>
+                                            </div>
+                                            <div class="tree-node" data-type="file" data-name="PaywallView.swift">
+                                                <span class="node-label"><i class="fas fa-file-code"></i> PaywallView.swift</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Info panel -->
+                        <div class="glass-card folder-info-card" id="folder-info-panel">
+                            <div class="info-file-header">
+                                <i class="fas fa-folder-open info-file-icon" id="info-file-icon"></i>
+                                <div class="info-file-meta">
+                                    <span class="info-file-name" id="info-file-name">DecideAI/</span>
+                                    <span class="info-file-size" id="info-file-size">Root Workspace</span>
+                                </div>
+                            </div>
+                            <div class="info-file-body" id="info-file-body">
+                                Select a file or folder in the project tree to view its technical documentation, metadata details, and responsibilities.
+                            </div>
+                            <div class="info-file-tags" id="info-file-tags">
+                                <!-- Tags rendered dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. UI COMPONENTS LIBRARY -->
+                <section id="ui-components">
+                    <span class="section-tag">iOS Component Assets</span>
+                    <h2>UI Components Library</h2>
+                    <p class="section-desc">Review the visual UI elements constructed inside the app, coupled with their SwiftUI code implementations.</p>
+                    
+                    <div class="component-playground">
+                        <!-- Sidebar tabs -->
+                        <div class="component-sidebar">
+                            <button class="btn-comp-tab active" data-comp="glass-card">GlassCard <i class="fas fa-chevron-right"></i></button>
+                            <button class="btn-comp-tab" data-comp="gradient-button">GradientButton <i class="fas fa-chevron-right"></i></button>
+                            <button class="btn-comp-tab" data-comp="confetti-view">ConfettiView <i class="fas fa-chevron-right"></i></button>
+                            <button class="btn-comp-tab" data-comp="premium-gate">PremiumGate <i class="fas fa-chevron-right"></i></button>
+                        </div>
+
+                        <!-- Viewer pane -->
+                        <div class="comp-viewer-pane">
+                            <div class="comp-preview-box" id="comp-preview-container">
+                                <div class="mock-glass-card">
+                                    <i class="fas fa-magic" style="font-size: 1.5rem; color: #a855f7;"></i>
+                                    <h4 style="margin-top: 0.5rem;">GlassCard Preview</h4>
+                                    <p>Frosted glass effect with sharp borders and soft dropshadow.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="comp-info-block">
+                                <h4 class="comp-info-title" id="comp-title">GlassCard Component</h4>
+                                <p class="comp-info-desc" id="comp-desc">A custom SwiftUI container container that renders an Apple-style frosted glass effect. Perfect for overlay elements, dashboard widgets, and premium dialog backgrounds.</p>
+                            </div>
+
+                            <pre class="comp-code-box"><code id="comp-code-block">struct GlassCard&lt;Content: View&gt;: View {
+    var content: () -> Content
+    
+    var body: some View {
+        content()
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.white.opacity(0.06))
+                    .background(VisualEffectBlur(material: .systemUltraThinMaterial, blendingMode: .withinWindow))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.white.opacity(0.12), lineWidth: 1)
+            )
+            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 10. SETUP INSTRUCTIONS -->
+                <section id="setup">
+                    <span class="section-tag">Developer Onboarding</span>
+                    <h2>Setup & Installation Steps</h2>
+                    <p class="section-desc">Follow this interactive terminal guide to set up the project locally on your machine.</p>
+                    
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="term-btn term-close"></span>
+                                <span class="term-btn term-min"></span>
+                                <span class="term-btn term-max"></span>
+                            </div>
+                            <span class="terminal-title">bash — developer setup</span>
+                        </div>
+                        
+                        <div class="terminal-tabs">
+                            <button class="terminal-tab-btn active" data-step="git">1. Clone Project</button>
+                            <button class="terminal-tab-btn" data-step="spm">2. Resolve Packages</button>
+                            <button class="terminal-tab-btn" data-step="secrets">3. Create Secrets</button>
+                            <button class="terminal-tab-btn" data-step="firebase">4. Firebase Bind</button>
+                        </div>
+                        
+                        <div class="terminal-body" id="terminal-content">
+                            <div class="terminal-line comment"># Clone the iOS application codebase</div>
+                            <div class="terminal-line cmd">git clone https://github.com/kalpesh/DecideAI.git</div>
+                            <div class="terminal-line output">Cloning into 'DecideAI'...
+remote: Enumerating objects: 1845, done.
+remote: Counting objects: 100% (1845/1845), done.
+Receiving objects: 100% (1845/1845), 25.64 MiB | 12.4 MB/s, done.
+Resolving deltas: 100% (920/920), done.</div>
+                            <div class="terminal-line cmd">cd DecideAI</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 11. ENVIRONMENT VARIABLES -->
+                <section id="env-variables">
+                    <span class="section-tag">Project Configurations</span>
+                    <h2>Environment Variables & xcconfig</h2>
+                    <p class="section-desc">SpinChoice uses the <code>Secrets.xcconfig</code> file to safely compile keys, keeping secrets out of code and binary commits.</p>
+                    
+                    <div class="glass-card" style="padding: 2rem;">
+                        <p>Copy <code>Secrets.xcconfig.template</code> to <code>Secrets.xcconfig</code> in the <code>Core/Config</code> directory before building.</p>
+                        
+                        <pre><code>// Secrets.xcconfig - Git-ignored configuration template
+
+// Shared Cloudflare Worker authorization key - must match Worker environment variables
+APP_SECRET = your-custom-shared-secret-auth-key
+
+// AppMetrica metrics project API key (Format: UUID)
+APPMETRICA_API_KEY = xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+// Development direct OpenAI key (Only evaluated if Worker URL is not resolved)
+OPENAI_API_KEY = </code></pre>
+                        
+                        <h4 style="margin: 1.5rem 0 0.5rem; color: var(--text-primary);">Security Precaution:</h4>
+                        <p style="font-size: 0.92rem; margin: 0; color: var(--accent-warning);">
+                            <i class="fas fa-exclamation-triangle"></i> NEVER add a production OpenAI key to <code>OPENAI_API_KEY</code>. Production keys must be stored in encrypted Cloudflare dashboard variables only.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 12. API DOCUMENTATION -->
+                <section id="api-docs">
+                    <span class="section-tag">Networking API</span>
+                    <h2>API Documentation (Cloudflare Proxy)</h2>
+                    <p class="section-desc">SpinChoice securely talks to OpenAI using a Cloudflare Worker proxy. API keys are never stored in the client binary.</p>
+                    
+                    <div class="glass-card" style="padding: 2rem;">
+                        <span class="api-endpoint-badge post">POST</span>
+                        <code>https://decidedai-proxy.utsav-ce5.workers.dev/chat</code>
+                        
+                        <h3 style="font-size: 1.15rem; margin-top: 1.5rem;">Request Headers</h3>
+                        <pre><code>Content-Type: application/json
+X-App-Secret: &lt;APP_SECRET_from_Secrets.xcconfig&gt;</code></pre>
+
+                        <h3 style="font-size: 1.15rem; margin-top: 1.5rem;">Request JSON Body</h3>
+                        <pre><code>{
+  "model": "gpt-4o-mini",
+  "temperature": 0.8,
+  "max_tokens": 600,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Question: 'What should I eat tonight?'\nCategory: Food"
+    }
+  ]
+}</code></pre>
+
+                        <h3 style="font-size: 1.15rem; margin-top: 1.5rem;">Successful Parsed JSON Array</h3>
+                        <pre><code>[
+  {
+    "title": "Sushi",
+    "explanation": "Light, fresh, and satisfying.",
+    "confidence": 82
+  },
+  {
+    "title": "Pizza",
+    "explanation": "Crowd-pleasing comfort food.",
+    "confidence": 74
+  }
+]</code></pre>
+                    </div>
+                </section>
+
+                <!-- 13. PERFORMANCE OPTIMIZATION -->
+                <section id="performance">
+                    <span class="section-tag">Resource Hygiene</span>
+                    <h2>Performance Optimization</h2>
+                    <p class="section-desc">How SpinChoice ensures fluid 60fps renders and battery optimization on consumer iOS hardware.</p>
+                    
+                    <div class="grid-2">
+                        <div class="glass-card" style="padding: 2rem;">
+                            <h3 style="margin-top: 0; color: var(--accent-indigo);"><i class="fas fa-bolt"></i> SwiftUI Canvas Rendering</h3>
+                            <p style="font-size: 0.95rem;">
+                                The Spin Wheel employs SwiftUI's GPU-driven <code>Canvas</code> API rather than individual shape layers. This lets the device render complex wheel dynamics in a single draw pass, bypassing view tree diffing and keeping frame rates locked at 60fps.
+                            </p>
+                            <h3 style="color: var(--accent-indigo);"><i class="fas fa-clock"></i> Pre-Warmed Tac Haptics</h3>
+                            <p style="font-size: 0.95rem; margin-bottom: 0;">
+                                Tactile haptic generators (<code>UIImpactFeedbackGenerator</code>) are initialized and warmed at application startup. This avoids the standard 50ms engine spin-up latency on the user's first interaction.
+                            </p>
+                        </div>
+
+                        <div class="glass-card" style="padding: 2rem;">
+                            <h3 style="margin-top: 0; color: var(--accent-purple);"><i class="fas fa-microchip"></i> Swift Tasks & Cancellation</h3>
+                            <p style="font-size: 0.95rem;">
+                                Heavy tasks like text transcription, network requests, and database commits run off the main thread. Spin mechanics cancel instantly (<code>spinTask?.cancel()</code>) if the user navigates away, preventing memory leaks and CPU waste.
+                            </p>
+                            <h3 style="color: var(--accent-purple);"><i class="fas fa-battery-half"></i> Battery Conservation</h3>
+                            <p style="font-size: 0.95rem; margin-bottom: 0;">
+                                Network monitors (<code>NWPathMonitor</code>) run on the background <code>.utility</code> queue. This lets iOS defer connectivity checks during system Low Power Mode, conserving battery.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 14. SECURITY SECTION -->
+                <section id="security">
+                    <span class="section-tag">Privacy & attestation</span>
+                    <h2>Application Security</h2>
+                    <p class="section-desc">How user inputs, secrets, and database transactions are protected within SpinChoice.</p>
+                    
+                    <div class="glass-card" style="padding: 2rem; border-left: 4px solid var(--accent-success);">
+                        <h3 style="margin-top: 0; color: var(--accent-success);"><i class="fas fa-user-shield"></i> Privacy by Design</h3>
+                        <ul style="margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; color: var(--text-secondary); font-size: 0.95rem;">
+                            <li><strong>Encrypted API Proxy</strong>: Client binaries carry no OpenAI API keys. The Worker acts as the sole key custodian.</li>
+                            <li><strong>Firebase App Check</strong>: Protects database endpoints by utilizing Apple DeviceCheck and cryptographic App Attest frameworks, rejecting spoofed simulation hits.</li>
+                            <li><strong>On-Device Speech Engine</strong>: Waveform translations run locally using the <code>Speech</code> framework. No user audio is recorded or uploaded.</li>
+                            <li><strong>Namespaced Local Cache</strong>: User files and directories are namespaced by Apple IDs (<code>decideai_decisions_&lt;userID&gt;</code>), securing cached data.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 15. ANALYTICS & MONITORING -->
+                <section id="analytics">
+                    <span class="section-tag">Telemetry Specs</span>
+                    <h2>Analytics & Monitoring Channels</h2>
+                    <p class="section-desc">SpinChoice uses dual-write telemetry logging. Analytics are dispatched to Firebase Analytics and Yandex AppMetrica simultaneously.</p>
+                    
+                    <div class="glass-card" style="padding: 2rem;">
+                        <h3 style="margin-top: 0; font-size: 1.25rem;">Core Telemetry Event Mapping</h3>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary);">Developers can trace and evaluate custom parameters across these channels:</p>
+                        
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+                                    <th style="padding: 0.75rem;">Event Name</th>
+                                    <th style="padding: 0.75rem;">Key Parameters</th>
+                                    <th style="padding: 0.75rem;">Fired Trigger</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem; font-family: var(--font-mono); color: var(--accent-blue);">decision_started</td>
+                                    <td style="padding: 0.75rem;">category, question_length, is_voice_input</td>
+                                    <td style="padding: 0.75rem;">User taps "Generate Options"</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem; font-family: var(--font-mono); color: var(--accent-blue);">ai_generation_success</td>
+                                    <td style="padding: 0.75rem;">category, options_count, latency_ms</td>
+                                    <td style="padding: 0.75rem;">AI finishes parsing option arrays</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem; font-family: var(--font-mono); color: var(--accent-blue);">spin_wheel_completed</td>
+                                    <td style="padding: 0.75rem;">category, result_title, confidence</td>
+                                    <td style="padding: 0.75rem;">Physics wheel slows down and stops</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.75rem; font-family: var(--font-mono); color: var(--accent-blue);">premium_feature_gated</td>
+                                    <td style="padding: 0.75rem;">feature, source</td>
+                                    <td style="padding: 0.75rem;">Free user hits daily decision limit</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 16. FUTURE ROADMAP -->
+                <section id="roadmap">
+                    <span class="section-tag">Milestone timeline</span>
+                    <h2>Future Product Roadmap</h2>
+                    <p class="section-desc">Our planned development stages for upcoming features and integrations.</p>
+                    
+                    <div class="roadmap-container">
+                        <div class="roadmap-track">
+                            <!-- Phase 1 -->
+                            <div class="roadmap-node completed">
+                                <div class="roadmap-dot"></div>
+                                <div class="roadmap-phase">Phase 1</div>
+                                <div class="roadmap-title">Core Launch</div>
+                                <div class="roadmap-desc">Interactive physics wheel, GPT-4o-mini proxy backend integration, and on-device Speech framework support.</div>
+                            </div>
+                            <!-- Phase 2 -->
+                            <div class="roadmap-node completed">
+                                <div class="roadmap-dot"></div>
+                                <div class="roadmap-phase">Phase 2</div>
+                                <div class="roadmap-title">Premium Tier</div>
+                                <div class="roadmap-desc">RevenueCat SDK integration, paywall pages, local database logging, and user category CRUD modules.</div>
+                            </div>
+                            <!-- Phase 3 -->
+                            <div class="roadmap-node">
+                                <div class="roadmap-dot"></div>
+                                <div class="roadmap-phase">Phase 3</div>
+                                <div class="roadmap-title">iOS Widgets</div>
+                                <div class="roadmap-desc">Lockscreen and homescreen decision widgets, letting users access options templates with one tap.</div>
+                            </div>
+                            <!-- Phase 4 -->
+                            <div class="roadmap-node">
+                                <div class="roadmap-dot"></div>
+                                <div class="roadmap-phase">Phase 4</div>
+                                <div class="roadmap-title">CloudSync</div>
+                                <div class="roadmap-desc">iCloud sync, Apple Watch companion app, and automated JSON data exports for premium users.</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 17. FAQ SECTION -->
+                <section id="faq">
+                    <span class="section-tag">Common Queries</span>
+                    <h2>Frequently Asked Questions</h2>
+                    <p class="section-desc">Answers to common product and developer questions about the app.</p>
+                    
+                    <div class="faq-list">
+                        <!-- FAQ 1 -->
+                        <div class="faq-item">
+                            <button class="faq-question-btn">
+                                How does the daily free limit operate?
+                                <i class="fas fa-chevron-down faq-chevron"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">
+                                    Free-tier users are allocated 5 AI option generations and 10 wheel spins daily. This quota resets at midnight local time. Limits are evaluated by <code>PremiumAccessManager</code> before initiating AI and spin actions.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 2 -->
+                        <div class="faq-item">
+                            <button class="faq-question-btn">
+                                Is voice input processed privately?
+                                <i class="fas fa-chevron-down faq-chevron"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">
+                                    Yes, completely. Voice input uses Apple's on-device <code>Speech</code> framework. No audio files are ever saved, stored, or sent to third-party APIs or external proxy servers.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 3 -->
+                        <div class="faq-item">
+                            <button class="faq-question-btn">
+                                Does the app function offline?
+                                <i class="fas fa-chevron-down faq-chevron"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">
+                                    Yes. If the user matches a category template exactly or is offline, <code>AIService</code> triggers a local fallback array (e.g. Sushi, Pizza, Indian, Salad Bowl for Food). This bypasses API requirements, keeping the wheel functional offline.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 4 -->
+                        <div class="faq-item">
+                            <button class="faq-question-btn">
+                                How do you prevent RevenueCat split-brain states?
+                                <i class="fas fa-chevron-down faq-chevron"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">
+                                    Our architecture designates <code>PremiumManager</code> as the single authoritative owner of the RevenueCat SDK. No other class is permitted to configure or register as a delegate, avoiding entitlement conflicts.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 18. CONTACT / SUPPORT SECTION -->
+                <section id="contact">
+                    <span class="section-tag">Get in Touch</span>
+                    <h2>Developer Support</h2>
+                    <p class="section-desc">Submit issues, request features, or reach out for inquiries about SpinChoice.</p>
+                    
+                    <div class="contact-grid">
+                        <div class="contact-info-cards">
+                            <div class="glass-card contact-card">
+                                <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                                <div class="contact-card-meta">
+                                    <span class="contact-card-label">Support Email</span>
+                                    <span class="contact-card-value"><a href="mailto:kalpeshpirojiya@gmail.com">kalpeshpirojiya@gmail.com</a></span>
+                                </div>
+                            </div>
+                            <div class="glass-card contact-card">
+                                <div class="contact-card-icon"><i class="fab fa-github"></i></div>
+                                <div class="contact-card-meta">
+                                    <span class="contact-card-label">GitHub Repository</span>
+                                    <span class="contact-card-value"><a href="https://github.com/kalpesh/DecideAI" target="_blank">github.com/kalpesh/DecideAI</a></span>
+                                </div>
+                            </div>
+                            <div class="glass-card contact-card">
+                                <div class="contact-card-icon"><i class="fas fa-user-lock"></i></div>
+                                <div class="contact-card-meta">
+                                    <span class="contact-card-label">Privacy Policy</span>
+                                    <span class="contact-card-value"><a href="https://privacypolicycenter.com/new/view/id6770957273" target="_blank">View Policy Details</a></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Card -->
+                        <div class="glass-card contact-form">
+                            <h3 style="margin-top: 0; font-size: 1.25rem;">Send a Message</h3>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="contact-name">Name</label>
+                                <input type="text" id="contact-name" class="form-control" placeholder="Enter your name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="contact-email">Email Address</label>
+                                <input type="email" id="contact-email" class="form-control" placeholder="Enter your email">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="contact-message">Message</label>
+                                <textarea id="contact-message" class="form-control" placeholder="Type your support request..."></textarea>
+                            </div>
+                            
+                            <button class="btn-submit">Submit Message</button>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- --- 19. FOOTER --- -->
+        <footer class="site-footer">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <div class="header-brand">
+                        <div class="brand-icon">S</div>
+                        <span>SpinChoice</span>
+                    </div>
+                    <p class="footer-brand-desc">
+                        Making decisions lighter, satisfying, and intelligence-driven. Spin the wheel, decide with AI.
+                    </p>
+                </div>
+                
+                <div>
+                    <div class="footer-col-title">Documentation</div>
+                    <ul class="footer-links">
+                        <li><a href="#flows">App Flows</a></li>
+                        <li><a href="#architecture">Architecture</a></li>
+                        <li><a href="#setup">Setup Guide</a></li>
+                        <li><a href="#api-docs">API References</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <div class="footer-col-title">Privacy & Legal</div>
+                    <ul class="footer-links">
+                        <li><a href="https://privacypolicycenter.com/new/view/id6770957273" target="_blank">Privacy Policy</a></li>
+                        <li><a href="https://privacypolicycenter.com/new/terms/id6770957273" target="_blank">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-col-title">Download</div>
+                    <ul class="footer-links">
+                        <li><a href="https://apple.co/3..." target="_blank">App Store</a></li>
+                        <li><a href="https://github.com/kalpesh/DecideAI" target="_blank">Source Code</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 SpinChoice. All rights reserved. Built with precision for iOS 16+.
+                </div>
+                <div class="footer-meta-info">
+                    <span><i class="fas fa-tag"></i> Version 1.0.0</span>
+                    <span><i class="fas fa-hashtag"></i> Build 1</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Gallery Lightbox Modal Overlay -->
+    <div class="lightbox" id="gallery-lightbox">
+        <button class="lightbox-close" id="lightbox-close-btn"><i class="fas fa-times"></i></button>
+        <img class="lightbox-content" id="lightbox-image" src="" alt="Zoomed Screenshot">
+        <div id="lightbox-placeholder-text" style="display: none; flex-direction: column; align-items: center; color: white;"></div>
+    </div>
+
+    <!-- Script File -->
+    <script>
+        /* ==========================================================================
+           SpinChoice iOS App Documentation JavaScript
+           ========================================================================== */
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initThemeManager();
+            initSearchSystem();
+            initSpinWheelDemo();
+            initFolderTreeExplorer();
+            initComponentPlayground();
+            initTerminalTabs();
+            initScreenshotGallery();
+            initFaqAccordion();
+            initCodeCopyButtons();
+            initActiveNavScrollSync();
+            initMobileMenu();
+        });
+
+        /* --- 1. Theme Manager --- */
+        function initThemeManager() {
+            const toggleBtn = document.getElementById('theme-toggle-btn');
+            if (!toggleBtn) return;
+
+            const cachedTheme = localStorage.getItem('theme');
+            const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+            if (cachedTheme === 'light' || (!cachedTheme && systemPrefersLight)) {
+                document.body.classList.add('light-mode');
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                const theme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+                localStorage.setItem('theme', theme);
+            });
+        }
+
+        /* --- 2. Search System --- */
+        function initSearchSystem() {
+            const searchInput = document.getElementById('doc-search-input');
+            if (!searchInput) return;
+
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                const sections = document.querySelectorAll('section');
+                const sidebarLinks = document.querySelectorAll('.sidebar-link-item');
+
+                if (query === '') {
+                    sections.forEach(sec => sec.style.display = '');
+                    sidebarLinks.forEach(link => link.style.display = '');
+                    return;
+                }
+
+                sections.forEach(section => {
+                    const sectionText = section.textContent.toLowerCase();
+                    const sectionId = section.getAttribute('id');
+                    const matches = sectionText.includes(query);
+
+                    section.style.display = matches ? '' : 'none';
+
+                    const matchingLink = document.querySelector(`.sidebar-link-item a[href="#${sectionId}"]`);
+                    if (matchingLink) {
+                        const li = matchingLink.parentElement;
+                        li.style.display = matches ? '' : 'none';
+                    }
+                });
+            });
+        }
+
+        /* --- 3. Spin Wheel Simulator --- */
+        function initSpinWheelDemo() {
+            const spinBtn = document.getElementById('wheel-spin-btn');
+            const wheelSvg = document.getElementById('wheel-svg');
+            const resultBox = document.getElementById('wheel-result');
+            const inputField = document.getElementById('wheel-new-option-input');
+            const addBtn = document.getElementById('wheel-add-option-btn');
+
+            if (!spinBtn || !wheelSvg) return;
+
+            let options = [
+                { title: "Sushi", explanation: "Light, fresh, and satisfying.", color: "#3b82f6" },
+                { title: "Pizza", explanation: "Crowd-pleasing comfort food.", color: "#a855f7" },
+                { title: "Indian", explanation: "Bold flavours and hearty portions.", color: "#ec4899" },
+                { title: "Salad Bowl", explanation: "Nutritious, energising, and clean.", color: "#10b981" }
+            ];
+
+            let currentRotation = 0;
+            let isSpinning = false;
+
+            function renderWheel() {
+                wheelSvg.innerHTML = '';
+                const count = options.length;
+                const angleStep = 360 / count;
+
+                options.forEach((opt, index) => {
+                    const startAngle = index * angleStep;
+                    const endAngle = (index + 1) * angleStep;
+
+                    const path = createSvgSectorPath(110, 110, 106, startAngle, endAngle);
+                    const pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    pathEl.setAttribute("d", path);
+                    pathEl.setAttribute("fill", opt.color);
+                    pathEl.setAttribute("stroke", "rgba(10,11,14,0.4)");
+                    pathEl.setAttribute("stroke-width", "2");
+                    wheelSvg.appendChild(pathEl);
+
+                    const textAngle = startAngle + (angleStep / 2);
+                    const textRadius = 70;
+                    const x = 110 + textRadius * Math.cos((textAngle - 90) * Math.PI / 180);
+                    const y = 110 + textRadius * Math.sin((textAngle - 90) * Math.PI / 180);
+
+                    const textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    textEl.setAttribute("x", x);
+                    textEl.setAttribute("y", y);
+                    textEl.setAttribute("fill", "#ffffff");
+                    textEl.setAttribute("font-size", "10px");
+                    textEl.setAttribute("font-weight", "600");
+                    textEl.setAttribute("text-anchor", "middle");
+                    textEl.setAttribute("dominant-baseline", "middle");
+                    textEl.setAttribute("transform", `rotate(${textAngle}, ${x}, ${y})`);
+                    textEl.textContent = opt.title.substring(0, 12);
+                    wheelSvg.appendChild(textEl);
+                });
+            }
+
+            function createSvgSectorPath(cx, cy, r, startAngle, endAngle) {
+                const startRad = (startAngle - 90) * Math.PI / 180;
+                const endRad = (endAngle - 90) * Math.PI / 180;
+
+                const x1 = cx + r * Math.cos(startRad);
+                const y1 = cy + r * Math.sin(startRad);
+                const x2 = cx + r * Math.cos(endRad);
+                const y2 = cy + r * Math.sin(endRad);
+
+                const largeArc = (endAngle - startAngle) > 180 ? 1 : 0;
+
+                return `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+            }
+
+            if (addBtn && inputField) {
+                addBtn.addEventListener('click', () => {
+                    const text = inputField.value.trim();
+                    if (text === '') return;
+
+                    if (options.length >= 8) {
+                        alert("Maximum 8 segments for the web simulator!");
+                        return;
+                    }
+
+                    const colors = ["#3b82f6", "#a855f7", "#ec4899", "#10b981", "#f59e0b", "#ef4444", "#6366f1", "#06b6d4"];
+                    const nextColor = colors[options.length % colors.length];
+
+                    options.push({
+                        title: text,
+                        explanation: `This is your custom option. Trust the wheel — it is the right call.`,
+                        color: nextColor
+                    });
+
+                    inputField.value = '';
+                    renderWheel();
+                });
+
+                inputField.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') addBtn.click();
+                });
+            }
+
+            spinBtn.addEventListener('click', () => {
+                if (isSpinning) return;
+                isSpinning = true;
+                spinBtn.disabled = true;
+                resultBox.innerHTML = '<span class="wheel-result-desc">The wheel is spinning... AI is thinking...</span>';
+
+                const rotations = 5 + Math.floor(Math.random() * 4);
+                const count = options.length;
+                const winnerIndex = Math.floor(Math.random() * count);
+                const sliceAngle = 360 / count;
+                
+                const targetWedgeAngle = (winnerIndex * sliceAngle) + (sliceAngle / 2);
+                const stopAngle = 360 - targetWedgeAngle;
+                
+                currentRotation += (rotations * 360) + (stopAngle - (currentRotation % 360));
+                
+                wheelSvg.style.transform = `rotate(${currentRotation}deg)`;
+
+                setTimeout(() => {
+                    isSpinning = false;
+                    spinBtn.disabled = false;
+                    
+                    const winner = options[winnerIndex];
+                    resultBox.innerHTML = `
+                        <div class="wheel-result-title">🎉 Result: ${winner.title}</div>
+                        <div class="wheel-result-desc">" ${winner.explanation} "</div>
+                    `;
+                }, 4000);
+            });
+
+            renderWheel();
+        }
+
+        /* --- 4. Folder Tree Explorer --- */
+        function initFolderTreeExplorer() {
+            const nodes = document.querySelectorAll('.node-label');
+            const infoName = document.getElementById('info-file-name');
+            const infoSize = document.getElementById('info-file-size');
+            const infoBody = document.getElementById('info-file-body');
+            const infoTags = document.getElementById('info-file-tags');
+            const infoIcon = document.getElementById('info-file-icon');
+
+            if (nodes.length === 0) return;
+
+            const fileDetails = {
+                "DecideAIApp.swift": {
+                    size: "2.1 KB",
+                    icon: "fa-file-code",
+                    desc: "The primary entry point of the iOS app using SwiftUI <code>@main</code> lifecycle. Orchestrates the synchronized SDK loading sequence: registers Firebase App Check, configures Firebase Analytics, launches the RevenueCat subscription framework, loads cached settings, and transitions to the Splash screen.",
+                    tags: ["SwiftUI", "App Lifecycle", "SDK Config"]
+                },
+                "AppState.swift": {
+                    size: "13.4 KB",
+                    icon: "fa-file-code",
+                    desc: "The application's global state machine. Extends <code>ObservableObject</code> and acts as the single source of truth for the entire session lifecycle. Manages critical view transitions (Splash, Onboarding, Authentication, profile creation, ATT consent) and houses active session states (current dilemmas, options list, results).",
+                    tags: ["State Management", "ObservableObject", "Launch Coordinator"]
+                },
+                "NavigationCoordinator.swift": {
+                    size: "6.8 KB",
+                    icon: "fa-file-code",
+                    desc: "Manages per-tab navigation stacks independently. Using type-safe enums (e.g. <code>HomeDestination</code>), it manages views push/pop actions, preventing layout overflows and coordinating tab bar hiding metrics during deeper flows.",
+                    tags: ["SwiftUI Navigation", "Routing", "Coordinator Pattern"]
+                },
+                "AIService.swift": {
+                    size: "18.9 KB",
+                    icon: "fa-file-code",
+                    desc: "Executes OpenAI GPT-4o-mini decision generation and coaching explanations. Integrates a 3-tier safety fallback system: attempts Cloudflare Proxy (production), slips to developer direct API keys (debug), and falls back on static local options if completely offline. Never leaks keys in the binary.",
+                    tags: ["OpenAI API", "JSON Parsing", "Offline Fallback"]
+                },
+                "PremiumManager.swift": {
+                    size: "15.7 KB",
+                    icon: "fa-file-code",
+                    desc: "Authoritative singleton managing RevenueCat SDK subscription states. Prevents split-brain entitlements by locking Purchases delegate commands. Integrates sandbox testing, caches status offline, and handles automatic foreground entitlement synchronization.",
+                    tags: ["RevenueCat SDK", "Paywall Logic", "Delegate Pattern"]
+                },
+                "Secrets.xcconfig": {
+                    size: "820 Bytes",
+                    icon: "fa-file-signature",
+                    desc: "Local configuration file hosting project secrets. Contains <code>APP_SECRET</code> and <code>APPMETRICA_API_KEY</code>. This file is strictly excluded from Git control to secure development keys.",
+                    tags: ["Security", "Build Config", "Git Ignored"]
+                },
+                "SpinWheelViewModel.swift": {
+                    size: "9.2 KB",
+                    icon: "fa-file-code",
+                    desc: "View model managing spin wheel rotation mechanics, physics decelerations, and haptic feedback intervals. Implements Swift Concurrency cancellation to discard operations if the screen transitions.",
+                    tags: ["Swift Concurrency", "Physics Model", "Haptic Sync"]
+                },
+                "SpinWheelView.swift": {
+                    size: "34.1 KB",
+                    icon: "fa-file-code",
+                    desc: "The most complex visual screen in the app. Renders the interactive 3D Spin Wheel using SwiftUI's GPU-backed <code>Canvas</code> API. Renders 8 segments, coordinates decelerating animations, and triggers light/heavy haptic ticks on boundary overlaps.",
+                    tags: ["SwiftUI Canvas", "GPU Rendering", "Custom Animations"]
+                },
+                "PaywallView.swift": {
+                    size: "28.3 KB",
+                    icon: "fa-file-code",
+                    desc: "High-end subscriptions page. Manages full-screen packages options, loads subscription offerings from RevenueCat dynamically, and triggers the purchase/restore flow.",
+                    tags: ["Paywall UI", "RevenueCat Offerings", "StoreKit Sandbox"]
+                },
+                "HomeView.swift": {
+                    size: "25.2 KB",
+                    icon: "fa-file-code",
+                    desc: "The core screen where users speak or write dilemmas. Integrates speech-to-text waveforms, custom categories chips, creative parameter switches, and triggers the option generation pipeline.",
+                    tags: ["SwiftUI Views", "Home Tab", "Voice Integration"]
+                }
+            };
+
+            nodes.forEach(node => {
+                node.addEventListener('click', (e) => {
+                    e.stopPropagation();
+
+                    nodes.forEach(n => n.classList.remove('active'));
+                    node.classList.add('active');
+
+                    const isFolder = node.dataset.type === 'folder';
+                    const name = node.dataset.name;
+
+                    if (isFolder) {
+                        const children = node.nextElementSibling;
+                        const icon = node.querySelector('.node-folder-icon');
+                        
+                        if (children) {
+                            children.classList.toggle('collapsed');
+                            if (children.classList.contains('collapsed')) {
+                                icon.className = 'fas fa-folder node-folder-icon';
+                            } else {
+                                icon.className = 'fas fa-folder-open node-folder-icon';
+                            }
+                        }
+
+                        infoName.textContent = name;
+                        infoSize.textContent = "Directory";
+                        infoIcon.className = "fas fa-folder info-file-icon";
+                        infoBody.innerHTML = `This folder is a module inside the iOS project folder layout. Click on nested files to view their role, size, and metadata details.`;
+                        infoTags.innerHTML = '';
+                    } else {
+                        const data = fileDetails[name] || {
+                            size: "Variable",
+                            icon: "fa-file-code",
+                            desc: "This is a source file containing application logic. In MVVM pattern, it helps isolate either layouts, models, data models, or service helpers.",
+                            tags: ["Swift", "iOS App Code"]
+                        };
+
+                        infoName.textContent = name;
+                        infoSize.textContent = data.size;
+                        infoIcon.className = `fas ${data.icon} info-file-icon`;
+                        infoBody.innerHTML = data.desc;
+
+                        infoTags.innerHTML = '';
+                        data.tags.forEach(t => {
+                            const span = document.createElement('span');
+                            span.className = 'info-file-tag';
+                            span.textContent = t;
+                            infoTags.appendChild(span);
+                        });
+                    }
+                });
+            });
+        }
+
+        /* --- 5. UI Component Playground --- */
+        function initComponentPlayground() {
+            const tabs = document.querySelectorAll('.btn-comp-tab');
+            const previewBox = document.getElementById('comp-preview-container');
+            const compTitle = document.getElementById('comp-title');
+            const compDesc = document.getElementById('comp-desc');
+            const codeBlock = document.getElementById('comp-code-block');
+
+            if (tabs.length === 0) return;
+
+            const componentsData = {
+                "glass-card": {
+                    title: "GlassCard Component",
+                    desc: "A custom SwiftUI container container that renders an Apple-style frosted glass effect. Perfect for overlay elements, dashboard widgets, and premium dialog backgrounds.",
+                    code: `struct GlassCard<Content: View>: View {
+    var content: () -> Content
+    
+    var body: some View {
+        content()
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.white.opacity(0.06))
+                    .background(VisualEffectBlur(material: .systemUltraThinMaterial, blendingMode: .withinWindow))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.white.opacity(0.12), lineWidth: 1)
+            )
+            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
+    }
+}`,
+                    html: `<div class="mock-glass-card">
+                        <i class="fas fa-magic" style="font-size: 1.5rem; color: #a855f7;"></i>
+                        <h4 style="margin-top: 0.5rem;">GlassCard Preview</h4>
+                        <p>Frosted glass effect with sharp borders and soft dropshadow.</p>
+                     </div>`
+                },
+                "gradient-button": {
+                    title: "GradientButton Component",
+                    desc: "The primary call-to-action button in the SpinChoice interface. Applies brand colors dynamically and integrates mild haptic feedback trigger cues.",
+                    code: `struct GradientButton: View {
+    let title: String
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: {
+            HapticsManager.shared.trigger(.light)
+            action()
+        }) {
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding(.vertical, 14)
+                .frame(maxWidth: .infinity)
+                .background(
+                    LinearGradient(
+                        colors: [Color("AccentBlue"), Color("AccentPurple")],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .cornerRadius(12)
+                .shadow(color: Color("AccentIndigo").opacity(0.4), radius: 8, x: 0, y: 4)
+        }
+    }
+}`,
+                    html: `<button class="mock-gradient-button">Generate Options</button>`
+                },
+                "confetti-view": {
+                    title: "ConfettiView trigger",
+                    desc: "Spawns canvas-rendered animated particles to celebrate the decision outcome, using SwiftUI custom modifiers triggered via state binders.",
+                    code: `struct ConfettiModifier: ViewModifier {
+    @Binding var trigger: Int
+    
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+            if trigger > 0 {
+                ConfettiCanvas(particleCount: 80)
+                    .transition(.opacity)
+                    .id(trigger)
+            }
+        }
+    }
+}`,
+                    html: `<button class="mock-confetti-btn" onclick="celebrateConfetti()"><i class="fas fa-gift" style="color: #ffcb2c;"></i> Trigger Celebration</button>`
+                },
+                "premium-gate": {
+                    title: "PremiumGate ViewModifier",
+                    desc: "Feature gating wrapper. Instantly covers locked premium features (e.g. AI Insights tabs) with a sleek blurred paywall overlay for free-tier users.",
+                    code: `struct PremiumGate: ViewModifier {
+    let feature: String
+    let source: String
+    let isLocked: Bool
+    
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+            if isLocked {
+                BlurView(style: .systemThinMaterialDark)
+                    .overlay(
+                        VStack(spacing: 12) {
+                            Image(systemName: "lock.fill")
+                                .font(.title)
+                            Text("Unlock \\(feature)")
+                            Button("Upgrade Now") {
+                                NavigationCoordinator.shared.showPaywall = true
+                            }
+                        }
+                    )
+            }
+        }
+    }
+}`,
+                    html: `<div class="mock-premium-gate">
+                        <div style="font-size: 0.8rem; opacity: 0.5;">Raw Premium Data Insights</div>
+                        <div class="mock-gate-overlay">
+                            <i class="fas fa-lock" style="color: #ffcb2c;"></i>
+                            <div class="mock-gate-title">Unlock AI Insights</div>
+                            <button class="mock-gradient-button mock-gate-btn">Upgrade Now</button>
+                        </div>
+                     </div>`
+                }
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const compKey = tab.dataset.comp;
+                    const data = componentsData[compKey];
+
+                    if (data) {
+                        compTitle.textContent = data.title;
+                        compDesc.textContent = data.desc;
+                        codeBlock.textContent = data.code;
+                        previewBox.innerHTML = data.html;
+                    }
+                });
+            });
+
+            window.celebrateConfetti = function() {
+                const btn = document.querySelector('.mock-confetti-btn');
+                btn.style.transform = "scale(0.95)";
+                setTimeout(() => btn.style.transform = "none", 100);
+                
+                for(let i=0; i<30; i++) {
+                    const p = document.createElement('div');
+                    p.style.position = 'absolute';
+                    p.style.width = '8px';
+                    p.style.height = '8px';
+                    p.style.borderRadius = '50%';
+                    p.style.background = ["#ff597b", "#ffcb2c", "#3b82f6", "#10b981", "#a855f7"][Math.floor(Math.random()*5)];
+                    p.style.left = '50%';
+                    p.style.top = '50%';
+                    p.style.pointerEvents = 'none';
+                    p.style.zIndex = '100';
+                    previewBox.appendChild(p);
+
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 30 + Math.random() * 120;
+                    const destX = Math.cos(angle) * distance;
+                    const destY = Math.sin(angle) * distance - 20;
+
+                    p.animate([
+                        { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                        { transform: `translate(calc(-50% + ${destX}px), calc(-50% + ${destY}px)) scale(0)`, opacity: 0 }
+                    ], {
+                        duration: 800 + Math.random()*600,
+                        easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
+                    }).onfinish = () => p.remove();
+                }
+            };
+        }
+
+        /* --- 6. Terminal Setup Tabs --- */
+        function initTerminalTabs() {
+            const tabs = document.querySelectorAll('.terminal-tab-btn');
+            const termBody = document.getElementById('terminal-content');
+
+            if (tabs.length === 0 || !termBody) return;
+
+            const termData = {
+                "git": `<div class="terminal-line comment"># Clone the iOS application codebase</div><div class="terminal-line cmd">git clone https://github.com/kalpesh/DecideAI.git</div><div class="terminal-line output">Cloning into 'DecideAI'...
+remote: Enumerating objects: 1845, done.
+remote: Counting objects: 100% (1845/1845), done.
+Receiving objects: 100% (1845/1845), 25.64 MiB | 12.4 MB/s, done.
+Resolving deltas: 100% (920/920), done.</div><div class="terminal-line cmd">cd DecideAI</div>`,
+                "spm": `<div class="terminal-line comment"># Xcode resolves Swift packages automatically on launch.</div><div class="terminal-line comment"># To build from the terminal using Swift Package Manager:</div><div class="terminal-line cmd">swift build -c release</div><div class="terminal-line output">Fetching https://github.com/firebase/firebase-ios-sdk.git
+Fetching https://github.com/RevenueCat/purchases-ios.git
+Fetching https://github.com/yandexmobile/appmetrica-sdk-ios.git
+Resolving Package Graph...
+Build Complete!</div>`,
+                "secrets": `<div class="terminal-line comment"># Create the Secrets configuration file from the template</div><div class="terminal-line cmd">cp DecideAI/Core/Config/Secrets.xcconfig.template DecideAI/Core/Config/Secrets.xcconfig</div><div class="terminal-line comment"># Edit config variables to add keys:</div><div class="terminal-line cmd">nano DecideAI/Core/Config/Secrets.xcconfig</div><div class="terminal-line output">APP_SECRET = your_shared_cloudflare_secret
+APPMETRICA_API_KEY = your_appmetrica_uuid_key</div>`,
+                "firebase": `<div class="terminal-line comment"># Place GoogleService-Info.plist into the project root</div><div class="terminal-line cmd">mv ~/Downloads/GoogleService-Info.plist DecideAI/GoogleService-Info.plist</div><div class="terminal-line comment"># Check if App Check tokens outputs during launch simulator runs:</div><div class="terminal-line cmd">xcrun simctl launch booted com.kalpesh.decideai</div>`
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const stepKey = tab.dataset.step;
+                    termBody.innerHTML = termData[stepKey] || '';
+                });
+            });
+        }
+
+        /* --- 7. Screenshot Gallery & Lightbox --- */
+        function initScreenshotGallery() {
+            const typeButtons = document.querySelectorAll('.btn-toggle-gallery');
+            const track = document.getElementById('gallery-slider-track');
+            const items = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('gallery-lightbox');
+            const lightboxImg = document.getElementById('lightbox-image');
+            const lightboxClose = document.getElementById('lightbox-close-btn');
+
+            if (items.length === 0) return;
+
+            typeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    typeButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const type = btn.dataset.device;
+
+                    items.forEach(item => {
+                        if (type === 'ipad') {
+                            item.classList.add('ipad-size');
+                            item.querySelector('.gallery-placeholder strong').textContent = item.querySelector('.gallery-placeholder strong').textContent.replace('iPhone', 'iPad');
+                        } else {
+                            item.classList.remove('ipad-size');
+                            item.querySelector('.gallery-placeholder strong').textContent = item.querySelector('.gallery-placeholder strong').textContent.replace('iPad', 'iPhone');
+                        }
+                    });
+
+                    track.scrollTo({ left: 0, behavior: 'smooth' });
+                });
+            });
+
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('img');
+                    const placeholder = item.querySelector('.gallery-placeholder');
+                    
+                    lightbox.classList.add('active');
+                    
+                    if (img && img.style.display !== 'none') {
+                        lightboxImg.src = img.src;
+                        lightboxImg.style.display = 'block';
+                        document.getElementById('lightbox-placeholder-text').style.display = 'none';
+                    } else {
+                        lightboxImg.style.display = 'none';
+                        const mockText = placeholder ? placeholder.querySelector('strong').textContent : "Screenshot Preview";
+                        const mockSub = placeholder ? placeholder.querySelector('span').textContent : "Placeholder";
+                        
+                        const box = document.getElementById('lightbox-placeholder-text');
+                        box.style.display = 'flex';
+                        box.innerHTML = `
+                            <i class="fas fa-mobile-alt" style="font-size: 4rem; color: #6366f1; margin-bottom: 1.5rem;"></i>
+                            <h3 style="margin: 0; color: #fff;">${mockText}</h3>
+                            <p style="margin: 0.5rem 0 0; color: #64748b; font-size: 0.9rem;">${mockSub}</p>
+                        `;
+                    }
+                });
+            });
+
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', () => {
+                    lightbox.classList.remove('active');
+                });
+            }
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                }
+            });
+        }
+
+        /* --- 8. FAQ Accordion --- */
+        function initFaqAccordion() {
+            const items = document.querySelectorAll('.faq-item');
+
+            items.forEach(item => {
+                const btn = item.querySelector('.faq-question-btn');
+                const answer = item.querySelector('.faq-answer');
+
+                if (!btn || !answer) return;
+
+                btn.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+
+                    items.forEach(other => {
+                        if (other !== item) {
+                            other.classList.remove('active');
+                            other.querySelector('.faq-answer').style.maxHeight = '0';
+                        }
+                    });
+
+                    item.classList.toggle('active');
+                    
+                    if (!isActive) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    } else {
+                        answer.style.maxHeight = '0';
+                    }
+                });
+            });
+        }
+
+        /* --- 9. Code Copy Utility --- */
+        function initCodeCopyButtons() {
+            const codeBlocks = document.querySelectorAll('pre');
+            
+            codeBlocks.forEach(block => {
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'btn-copy-code';
+                copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy';
+                
+                block.appendChild(copyBtn);
+                
+                copyBtn.addEventListener('click', () => {
+                    const code = block.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        copyBtn.innerHTML = '<i class="fas fa-check" style="color: #10b981;"></i> Copied!';
+                        copyBtn.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+                        
+                        setTimeout(() => {
+                            copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy';
+                            copyBtn.style.borderColor = '';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error("Copy failed", err);
+                    });
+                });
+            });
+        }
+
+        /* --- 10. Scroll Navigation Highlight Sync --- */
+        function initActiveNavScrollSync() {
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.sidebar-link-item');
+
+            if (sections.length === 0 || navItems.length === 0) return;
+
+            window.addEventListener('scroll', () => {
+                let currentSectionId = '';
+                const scrollPosition = window.scrollY + 120;
+
+                sections.forEach(sec => {
+                    const top = sec.offsetTop;
+                    const height = sec.offsetHeight;
+                    
+                    if (scrollPosition >= top && scrollPosition < (top + height)) {
+                        currentSectionId = sec.getAttribute('id');
+                    }
+                });
+
+                if (currentSectionId) {
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        const link = item.querySelector('a');
+                        if (link && link.getAttribute('href') === `#${currentSectionId}`) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        /* --- 11. Mobile Navigation Menu Toggle --- */
+        function initMobileMenu() {
+            const toggleBtn = document.getElementById('mobile-menu-btn');
+            const sidebar = document.getElementById('sidebar-menu');
+
+            if (!toggleBtn || !sidebar) return;
+
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                sidebar.classList.toggle('active');
+                
+                // Toggle between bar and cross icon
+                const icon = toggleBtn.querySelector('i');
+                if (sidebar.classList.contains('active')) {
+                    icon.className = 'fas fa-times';
+                    sidebar.style.display = 'flex';
+                    sidebar.style.position = 'fixed';
+                    sidebar.style.left = '0';
+                    sidebar.style.top = 'var(--header-height)';
+                    sidebar.style.width = '100%';
+                    sidebar.style.zIndex = '999';
+                    sidebar.style.background = 'var(--bg-base)';
+                    sidebar.style.height = 'calc(100vh - var(--header-height))';
+                } else {
+                    icon.className = 'fas fa-bars';
+                    sidebar.removeAttribute('style');
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            const links = sidebar.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (sidebar.classList.contains('active')) {
+                        sidebar.classList.remove('active');
+                        toggleBtn.querySelector('i').className = 'fas fa-bars';
+                        sidebar.removeAttribute('style');
+                    }
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && e.target !== toggleBtn) {
+                    sidebar.classList.remove('active');
+                    toggleBtn.querySelector('i').className = 'fas fa-bars';
+                    sidebar.removeAttribute('style');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
